@@ -13,7 +13,7 @@ savePixels(blur(lena, 5), "png").pipe(process.stdout)
 
 Writes the following png to stdout:
 
-<img src="example/blur.png">
+<img src="https://raw.github.com/mikolalysenko/ndarray-gaussian-filter/master/example/blur.png">
 
 # Install
 
