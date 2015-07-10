@@ -3,7 +3,7 @@
 module.exports = gaussBlur
 
 var ndarray = require("ndarray")
-var bits = require("bit-twiddle")
+var nextPow2 = require("next-pow-2")
 var ops = require("ndarray-ops")
 var fft = require("ndarray-fft")
 var pool = require("typedarray-pool")
@@ -18,7 +18,7 @@ var gaussFilter = cwise({
       if(sigma[i] < 1e-6) {
         this.w[i] = 0.0
       } else {
-        this.w[i] = -Math.pow(Math.PI * sigma[i] / n[i], 2)
+        this.w[i] = -2*Math.pow(Math.PI * sigma[i] / n[i], 2)
       }
     }
   },
@@ -40,11 +40,14 @@ function gaussBlur(arr, sigma, wrap) {
   if(!Array.isArray(wrap)) {
     wrap = dup(arr.dimension, !!wrap)
   }
+  if(!Array.isArray(sigma)) {
+    sigma = dup(arr.dimension, sigma)
+  }
   for(var i=0; i<arr.dimension; ++i) {
     if(wrap[i]) {
       padded[i] = arr.shape[i]
     } else {
-      padded[i] = bits.nextPow2(arr.shape[i])
+      padded[i] = nextPow2(arr.shape[i] + 2*Math.ceil(3*sigma[i]))
     }
     nsize *= padded[i]
   }
@@ -55,11 +58,7 @@ function gaussBlur(arr, sigma, wrap) {
   ops.assign(re_top, arr)
   ops.assigns(im, 0.0)
   fft(1, re, im)
-  if(Array.isArray(sigma)) {
-    gaussFilter(re, im, sigma)  
-  } else {
-    gaussFilter(re, im, dup(arr.dimension, sigma))
-  }
+  gaussFilter(re, im, sigma)  
   fft(-1, re, im)
   ops.assign(arr, re_top)
   pool.freeDouble(re)

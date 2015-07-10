@@ -1,7 +1,7 @@
 "use strict"
 
-var lena = require("luminance")(require("lena"))
+var baboon = require("luminance")(require("baboon-image"))
 var savePixels = require("save-pixels")
 var blur = require("../gauss")
 
-savePixels(blur(lena, 5), "png").pipe(process.stdout)
+savePixels(blur(baboon, 5), "png").pipe(process.stdout)

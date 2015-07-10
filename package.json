@@ -1,42 +1,52 @@
 {
   "name": "ndarray-gaussian-filter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Gaussian filter for ndarrays",
   "main": "gauss.js",
   "directories": {
     "example": "example"
   },
+  "browserify": {
+    "transform": [
+      "cwise"
+    ]
+  },
   "dependencies": {
-    "bit-twiddle": "^0.0.2",
-    "cwise": "^0.4.0",
-    "dup": "^0.0.0",
-    "ndarray": "^1.0.10",
-    "ndarray-fft": "^0.1.0",
-    "ndarray-ops": "^1.2.1",
-    "typedarray-pool": "^0.1.2"
+    "next-pow-2": "^1.0.0",
+    "cwise": "^1.0.7",
+    "dup": "^1.0.0",
+    "ndarray": "^1.0.18",
+    "ndarray-fft": "^1.0.0",
+    "ndarray-ops": "^1.2.2",
+    "typedarray-pool": "^1.1.0"
   },
   "devDependencies": {
-    "lena": "^1.0.0",
-    "luminance": "^1.0.2",
-    "save-pixels": "^0.3.0"
+    "baboon-image": "^2.0.0",
+    "luminance": "^1.0.3",
+    "save-pixels": "^2.2.0",
+    "tape": "^4.0.0",
+    "test-fuzzy-array": "^1.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape test/*.js"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mikolalysenko/ndarray-gaussian-filter.git"
+    "url": "git://github.com/scijs/ndarray-gaussian-filter.git"
   },
   "keywords": [
+    "scijs",
     "ndarray",
     "gaussian",
     "filter",
     "ndarray"
   ],
   "author": "Mikola Lysenko",
+  "contributors": [
+    "Jasper van de Gronde <th.v.d.gronde@hccnet.nl>"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mikolalysenko/ndarray-gaussian-filter/issues"
-  },
-  "homepage": "https://github.com/mikolalysenko/ndarray-gaussian-filter"
+    "url": "https://github.com/scijs/ndarray-gaussian-filter/issues"
+  }
 }
