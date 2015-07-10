@@ -32,5 +32,5 @@ Filters an ndarray using a Gaussian filter.
 
 **Returns** `array`
 
-# Credits
+## License
 (c) 2014 Mikola Lysenko. MIT License
